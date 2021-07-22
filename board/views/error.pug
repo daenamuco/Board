@@ -1,0 +1,14 @@
+doctype html
+html 
+    head 
+        meta(charset="utf-8")
+        title=title
+        link(rel='stylesheet', href='/restFront.css')
+    body 
+        nav
+            a(href="/") 홈 
+            a(href="/post") 게시글 쓰기
+        h1=message 
+        h2=error.status 
+        pre #{error.stack}
+        

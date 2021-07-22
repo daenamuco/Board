@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>대나무 갤러리</title>
+  <link rel="stylesheet" href="./restFront.css" />
+</head>
+<body>
+<nav>
+  <a href="/">홈</a>
+  <a href="/post">게시글 쓰기</a>
+</nav>
+<div>
+  <form action="http://localhost:3000/post" method="post">
+    <p>제목<br><input type="text" name="title"><br></p>
+    <p>본문<br><textarea name="content" style="width:500px; height:200px;"></textarea></p>
+    <button type="submit">게시</button>
+  </form>
+</div>
+</body>
+</html>

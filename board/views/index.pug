@@ -1,0 +1,14 @@
+//-layout.pug 파일을 가져옴-
+extends layout 
+
+//-layout에 content 부분에 이 부분을 삽입
+//-받아온 짭DB를 출력하고 각각의 글에 링크를 붙임 -> /post/id 주소로 GET 요청, id == index임
+block content 
+    h1 대나무 갤러리
+    h2 글 목록
+    ul 
+        for i, index in list
+            a(href="/post/" + index)
+                li #{i.title}
+    
+    
