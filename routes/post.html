@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>대나무 갤러리</title>
+    <link rel="stylesheet" href="./restFront.css" />
+    <script src="https://kit.fontawesome.com/f1dcfd3a41.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.tiny.cloud/1/9hg3em404c79zxhunruvsmqk0n8of6rcqbdluve9wp3qdydf/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+      tinymce.init({
+        selector: '#editor'
+      });
+    </script>
+  </head>
+  <body>
+    <nav>
+      <a class='home' href="/">DAENAMU</a>
+      <a class='post' href="/post">WRITE POST<i class='fa fa-pen'></i></a>
+    </nav>
+    <div id="postCont">
+      <span class='title'>게시물 쓰기</span>
+      <form class="postContainer" action="http://localhost:3000/post" method="post">
+        <div class='titleContainer'>
+          <input class="postName" type="text" name="title" required>
+          <label>제목</label>
+        </div>
+        <textarea id="editor" name="content" style="width: 70vw; height: 135vh; margin: 30px;"></textarea>
+        <button type="submit">저장</button>
+      </form>
+    </div>
+    <footer>
+      <p class='info'>&copy; 대나무 Corp.</p>
+    </footer>
+    <script type="text/javascript">
+      window.addEventListener('scroll', function() {
+        var header = document.querySelector('nav');
+        header.classList.toggle('navDown', window.scrollY > 50);
+      });
+    </script>
+  </body>
+</html>

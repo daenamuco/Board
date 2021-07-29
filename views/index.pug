@@ -1,0 +1,20 @@
+//-layout.pug 파일을 가져옴-
+extends layout 
+
+//-layout에 content 부분에 이 부분을 삽입
+//-받아온 짭DB를 출력하고 각각의 글에 링크를 붙임 -> /post/id 주소로 GET 요청, id == index임
+block content 
+    h2(class='indexTitle') 글 목록
+    table(class='eachPost')
+        thead
+            tr
+                th 번호
+                th 제목
+                th 작성일자
+        tbody
+            for i, index in list
+                tr
+                    td #{index + 1}
+                    td
+                        a(href="/post/" + index) #{i.title}
+                    td #{i.time.slice(0, 8)}

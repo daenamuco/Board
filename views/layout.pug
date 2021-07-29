@@ -1,0 +1,67 @@
+//-모든 웹사이트에 공통적으로 보여지는 부분
+doctype html
+html 
+    head
+        meta(charset="utf-8")
+        title 대나무 갤러리
+        link(rel='stylesheet', href='/restFront.css')
+        script(src="https://kit.fontawesome.com/f1dcfd3a41.js" crossorigin="anonymous")
+    body 
+        nav
+            a.home(href="/") DAENAMU
+            a.post(href="/post") WRITE POST
+                i(class="fas fa-pen")
+        div(class='mainCont')
+            block content
+        footer
+            p(class='info').
+                &copy; 대나무 Corp.
+        script(type="text/javascript").
+            window.addEventListener('scroll', function() {
+                var header = document.querySelector('nav');
+                header.classList.toggle('navDown', window.scrollY > 50);
+            });
+        script(type="text/javascript").
+            /**
+            * Sorts a HTML table
+            *
+            * @param {HTMLTableElement} table Table to sort
+            * @param {number} column The index of the column to sort
+            * @param {boolean} asc Determines if the sorting will be ascending or descending
+            */
+            function sortTableByColumn(table, column, asc = true) {
+                const dirModifier = asc ? 1 : -1;
+                const tBody = table.tBodies[0];
+                const rows = Array.from(tBody.querySelectorAll("tr"));
+
+                //각 행을 분류함
+                const sortedRows = rows.sort((a, b) => {
+                    const aColText = a.querySelector(`td:nth-child(${ column + 1 })`).textContent.trim();
+                    const bColText = b.querySelector(`td:nth-child(${ column + 1 })`).textContent.trim();
+                    
+                    return aColText > bColText ? (1 * dirModifier) : (-1 * dirModifier);
+                });
+
+                //테이블에서 모든 tr 제거
+                while (tBody.firstChild) {
+                    tBody.removeChild(tBody.firstChild);
+                }
+
+                //새롭게 분류된 행들 추가
+                tBody.append(...sortedRows);
+
+                //테이블의 현재 정렬 상태 저장
+                table.querySelectorAll("th").forEach(th => th.classList.remove("th-sort-asc", "th-sort-desc"));
+                table.querySelector(`th:nth-child(${ column + 1})`).classList.toggle("th-sort-asc", asc);
+                table.querySelector(`th:nth-child(${ column + 1})`).classList.toggle("th-sort-desc", !asc);
+            }
+
+            document.querySelectorAll(".eachPost th").forEach(headerCell => {
+                headerCell.addEventListener("click", () => {
+                    const tableElement = headerCell.parentElement.parentElement.parentElement;
+                    const headerIndex = Array.prototype.indexOf.call(headerCell.parentElement.children, headerCell);
+                    const currentIsAscending = headerCell.classList.contains("th-sort-asc");
+
+                    sortTableByColumn(tableElement, headerIndex, !currentIsAscending);
+                });
+            });
